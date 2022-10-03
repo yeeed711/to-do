@@ -3,6 +3,8 @@ import reset from 'styled-reset';
 import { useRecoilState } from 'recoil';
 import { isDarkAtom } from './atoms';
 import { darkTheme, lightTheme } from './theme';
+import ToDoList from './components/ToDoList';
+import Icon from './components/commen/Icon';
 
 const GlobalStyle = createGlobalStyle`
 ${reset}
@@ -62,16 +64,8 @@ input {
 }
 `;
 
-interface IIcon {
-  name: string;
-}
-
 function App() {
   const [isDark, setIsDark] = useRecoilState(isDarkAtom);
-
-  const Icon = ({ name }: IIcon) => {
-    return <div className='material-icons-round'>{name}</div>;
-  };
 
   const ToggleMode = () => {
     setIsDark((prev) => !prev);
@@ -81,10 +75,10 @@ function App() {
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
-        <div>hello</div>
         <ToggleBtn onClick={ToggleMode}>
           <Icon name={isDark ? 'dark_mode' : 'wb_sunny'} />
         </ToggleBtn>
+        <ToDoList />
       </ThemeProvider>
     </>
   );
@@ -93,9 +87,11 @@ function App() {
 export default App;
 
 const ToggleBtn = styled.button`
+  font-size: 3rem;
   border: 2px solid #03c076;
   border-radius: 50%;
   padding: 0.9rem;
+  display: flex;
   position: absolute;
   top: 3rem;
   right: 3rem;
