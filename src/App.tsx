@@ -1,6 +1,6 @@
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import reset from 'styled-reset';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { isDarkAtom } from './atoms';
 import { darkTheme, lightTheme } from './theme';
 
@@ -62,17 +62,47 @@ input {
 }
 `;
 
+interface IIcon {
+  name: string;
+}
+
 function App() {
-  const isDark = useRecoilValue(isDarkAtom);
+  const [isDark, setIsDark] = useRecoilState(isDarkAtom);
+
+  const Icon = ({ name }: IIcon) => {
+    return <div className='material-icons-round'>{name}</div>;
+  };
+
+  const ToggleMode = () => {
+    setIsDark((prev) => !prev);
+  };
 
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
         <div>hello</div>
+        <ToggleBtn onClick={ToggleMode}>
+          <Icon name={isDark ? 'dark_mode' : 'wb_sunny'} />
+        </ToggleBtn>
       </ThemeProvider>
     </>
   );
 }
 
 export default App;
+
+const ToggleBtn = styled.button`
+  border: 2px solid #03c076;
+  border-radius: 50%;
+  padding: 0.9rem;
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  color: #03c076;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  &:hover {
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.3);
+  }
+`;
