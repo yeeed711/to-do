@@ -43,8 +43,8 @@ const ToDo = ({ id, text, category }: IToDo) => {
             해야할 일
           </DoBtn>
         )}
-        {category !== Categories.하는중 && (
-          <DoingBtn name={Categories.하는중} onClick={onClick}>
+        {category !== Categories['진행 중'] && (
+          <DoingBtn name={Categories['진행 중']} onClick={onClick}>
             진행 중
           </DoingBtn>
         )}

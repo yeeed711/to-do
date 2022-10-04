@@ -1,8 +1,8 @@
 import { atom, selector } from 'recoil';
 
 export enum Categories {
-  '해야할일' = '해야할일',
-  '하는중' = '하는중',
+  '해야할일' = '해야할 일',
+  '진행 중' = '진행 중',
   '완료됨' = '완료됨',
 }
 export interface IToDo {
