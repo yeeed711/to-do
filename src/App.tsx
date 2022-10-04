@@ -65,17 +65,10 @@ input {
 function App() {
   const [isDark, setIsDark] = useRecoilState(isDarkAtom);
 
-  const ToggleMode = () => {
-    setIsDark((prev) => !prev);
-  };
-
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
-        <ToggleBtn onClick={ToggleMode}>
-          <Icon name={isDark ? 'dark_mode' : 'wb_sunny'} />
-        </ToggleBtn>
         <ToDoList />
       </ThemeProvider>
     </>
@@ -83,20 +76,3 @@ function App() {
 }
 
 export default App;
-
-const ToggleBtn = styled.button`
-  font-size: 3rem;
-  border: 2px solid ${(props) => props.theme.accentColor};
-  border-radius: 50%;
-  padding: 0.9rem;
-  display: flex;
-  position: absolute;
-  top: 3rem;
-  right: 3rem;
-  color: ${(props) => props.theme.accentColor};
-  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s;
-  &:hover {
-    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.3);
-  }
-`;

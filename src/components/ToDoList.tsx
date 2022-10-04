@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { categoryState, Categories, toDoSelector } from '../atoms';
+import { categoryState, Categories, toDoSelector, isDarkAtom } from '../atoms';
 import ToDo from './ToDo';
 import CreateToDo from './CreateToDo';
 import Icon from './commen/Icon';
@@ -8,6 +8,11 @@ import Icon from './commen/Icon';
 const ToDoList = () => {
   const toDos = useRecoilValue(toDoSelector);
   const [category, setCategory] = useRecoilState(categoryState);
+  const [isDark, setIsDark] = useRecoilState(isDarkAtom);
+
+  const ToggleMode = () => {
+    setIsDark((prev) => !prev);
+  };
 
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setCategory(event.currentTarget.value as any);
@@ -21,6 +26,9 @@ const ToDoList = () => {
 
   return (
     <Container>
+      <ToggleBtn onClick={ToggleMode}>
+        <Icon name={isDark ? 'dark_mode' : 'wb_sunny'} />
+      </ToggleBtn>
       <Title>TO DO</Title>
       <Category>
         {Object.values(Categories).map((item, idx) => {
@@ -36,47 +44,6 @@ const ToDoList = () => {
             </li>
           );
         })}
-
-        {/*      {Object.values(Categories).map((item, idx) => {
-          switch (item) {
-            case '해야할 일':
-              return (
-                <li key={idx}>
-                  <button
-                    value={item}
-                    onClick={onClick}
-                    disabled={category === item}>
-                    {item}
-                    <Icon name='format_list_bulleted' />
-                  </button>
-                </li>
-              );
-            case '진행 중':
-              return (
-                <li key={idx}>
-                  <button
-                    value={item}
-                    onClick={onClick}
-                    disabled={category === item}>
-                    {item}
-                    <Icon name='sync' />
-                  </button>
-                </li>
-              );
-            case '완료됨':
-              return (
-                <li key={idx}>
-                  <button
-                    value={item}
-                    onClick={onClick}
-                    disabled={category === item}>
-                    {item}
-                    <Icon name='task_alt' />
-                  </button>
-                </li>
-              );
-          }
-        })} */}
       </Category>
       <CreateToDo />
       <ToDoItems>
@@ -92,13 +59,13 @@ export default ToDoList;
 
 const Container = styled.div`
   display: flex;
-  width: 500px;
+  max-width: 784px;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: 10rem auto;
   gap: 3rem;
-  padding: 3rem;
+  padding: 3rem 3rem 10rem;
+  height: 100vh;
+  margin: 0 auto;
 `;
 
 const Title = styled.h1`
@@ -133,4 +100,23 @@ const Category = styled.ul`
 const ToDoItems = styled.ul`
   border-radius: 1rem;
   width: 100%;
+  position: relative;
+  overflow-y: scroll;
+`;
+
+const ToggleBtn = styled.button`
+  font-size: 3rem;
+  border: 2px solid ${(props) => props.theme.accentColor};
+  border-radius: 50%;
+  padding: 9px;
+  display: flex;
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+  color: ${(props) => props.theme.accentColor};
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  &:hover {
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.3);
+  }
 `;
