@@ -22,6 +22,18 @@ const ToDo = ({ id, text, category }: IToDo) => {
     });
   };
 
+  const handleDelete = () => {
+    if (window.confirm('정말 삭제하시겠어요?')) {
+      setToDos((oldToDos) => {
+        const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
+        return [
+          ...oldToDos.slice(0, targetIndex),
+          ...oldToDos.slice(targetIndex + 1),
+        ];
+      });
+    }
+  };
+
   return (
     <Li>
       {text}
@@ -41,7 +53,7 @@ const ToDo = ({ id, text, category }: IToDo) => {
             완료됨
           </DoneBtn>
         )}
-        <DelBtn>삭제</DelBtn>
+        <DelBtn onClick={handleDelete}>삭제</DelBtn>
       </ButtonWrapper>
     </Li>
   );
