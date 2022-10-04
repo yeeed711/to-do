@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { categoryState, toDoState } from '../atoms';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { categoryState, toDoState } from '../atoms';
 import styled from 'styled-components';
-import Icon from './commen/Icon';
 
 interface IForm {
   toDo: string;
@@ -30,18 +29,54 @@ const CreateToDo = () => {
   }, [toDos]);
 
   return (
-    <form onSubmit={handleSubmit(handleVaild)}>
-      <input
+    <Form onSubmit={handleSubmit(handleVaild)}>
+      <ToDoInput
         {...register('toDo', { required: '할 일이 입력되지 않았습니다!' })}
-        placeholder='해야할 일을 입력해주세요 :)'
+        placeholder='할 일을 입력해주세요 :)'
       />
-      <Button>
-        <Icon name='add_circle_outline' />
-      </Button>
-    </form>
+      <Button>입력</Button>
+    </Form>
   );
 };
 
 export default CreateToDo;
 
-const Button = styled.button``;
+const Form = styled.form`
+  width: 100%;
+  display: flex;
+  gap: 10px;
+`;
+
+const ToDoInput = styled.input`
+  width: 100%;
+  border: 2px solid #e2e2e2;
+  font-size: 1.6rem;
+  padding: 0.8rem;
+  border-radius: 0.8rem;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.1);
+  background-color: ${(props) => props.theme.cardColor};
+  transition: border-color 0.3s;
+  &:focus {
+    border-color: ${(props) => props.theme.accentColor};
+    color: ${(props) => props.theme.accentColor};
+    &::placeholder {
+      color: ${(props) => props.theme.accentColor};
+    }
+  }
+`;
+
+const Button = styled.button`
+  flex-shrink: 0;
+  font-size: 1.6rem;
+  padding: 0.4rem 1rem;
+  border: 2px solid ${(props) => props.theme.accentColor};
+  border-radius: 0.8rem;
+  color: ${(props) => props.theme.accentColor};
+  font-weight: 600;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.1);
+  background-color: ${(props) => props.theme.cardColor};
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: #e6fff5;
+  }
+`;

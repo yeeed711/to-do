@@ -34,9 +34,7 @@ button {
   background: none;
   border: none;
   padding: 0;
-  font: inherit;
   cursor: pointer;
-  background-color: inherit;
 }
 
 img {
@@ -88,14 +86,14 @@ export default App;
 
 const ToggleBtn = styled.button`
   font-size: 3rem;
-  border: 2px solid #03c076;
+  border: 2px solid ${(props) => props.theme.accentColor};
   border-radius: 50%;
   padding: 0.9rem;
   display: flex;
   position: absolute;
   top: 3rem;
   right: 3rem;
-  color: #03c076;
+  color: ${(props) => props.theme.accentColor};
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.1);
   transition: all 0.2s;
   &:hover {
