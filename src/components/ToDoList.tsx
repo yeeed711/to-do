@@ -1,9 +1,9 @@
-import styled from 'styled-components';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { categoryState, Categories, toDoSelector, isDarkAtom } from '../atoms';
+import styled from 'styled-components';
 import ToDo from './ToDo';
 import CreateToDo from './CreateToDo';
-import Icon from './commen/Icon';
+import Icon from './Icon';
 
 const ToDoList = () => {
   const toDos = useRecoilValue(toDoSelector);

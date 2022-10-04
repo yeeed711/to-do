@@ -1,10 +1,9 @@
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import reset from 'styled-reset';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { isDarkAtom } from './atoms';
 import { darkTheme, lightTheme } from './theme';
 import ToDoList from './components/ToDoList';
-import Icon from './components/commen/Icon';
 
 const GlobalStyle = createGlobalStyle`
 ${reset}
@@ -63,7 +62,7 @@ input {
 `;
 
 function App() {
-  const [isDark, setIsDark] = useRecoilState(isDarkAtom);
+  const isDark = useRecoilValue(isDarkAtom);
 
   return (
     <>

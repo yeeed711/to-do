@@ -19,9 +19,3 @@ export const darkTheme: DefaultTheme = {
   redColor: '#e22343',
   redBgColor: '#00000',
 };
-
-//#e22343 red
-//#eeeeee disabled
-//#fdebec red background
-//#f8f8f8 category background
-//#a1a1a1 category disabled text color
