@@ -1,27 +1,17 @@
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { categoryState, Categories, toDoSelector, isDarkAtom } from '../atoms';
+import { toDoSelector, isDarkAtom } from '../atoms';
 import styled from 'styled-components';
 import ToDo from './ToDo';
 import CreateToDo from './CreateToDo';
 import Icon from './Icon';
+import CategoryList from './CategoryList';
 
-const ToDoList = () => {
+const Home = () => {
   const toDos = useRecoilValue(toDoSelector);
-  const [category, setCategory] = useRecoilState(categoryState);
   const [isDark, setIsDark] = useRecoilState(isDarkAtom);
 
   const ToggleMode = () => {
     setIsDark((prev) => !prev);
-  };
-
-  const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setCategory(event.currentTarget.value as any);
-  };
-
-  const Icons = {
-    '해야할 일': <Icon name='format_list_bulleted' />,
-    '진행 중': <Icon name='sync' />,
-    완료됨: <Icon name='task_alt' />,
   };
 
   return (
@@ -29,21 +19,8 @@ const ToDoList = () => {
       <ToggleBtn onClick={ToggleMode}>
         <Icon name={isDark ? 'dark_mode' : 'wb_sunny'} />
       </ToggleBtn>
-      <Title>TO DO</Title>
       <Category>
-        {Object.values(Categories).map((item, idx) => {
-          return (
-            <li key={idx}>
-              <button
-                value={item}
-                onClick={onClick}
-                disabled={category === item}>
-                {item}
-                {Icons[item]}
-              </button>
-            </li>
-          );
-        })}
+        <CategoryList />
       </Category>
       <CreateToDo />
       <ToDoItems>
@@ -55,7 +32,7 @@ const ToDoList = () => {
   );
 };
 
-export default ToDoList;
+export default Home;
 
 const Container = styled.div`
   display: flex;
@@ -68,33 +45,10 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-const Title = styled.h1`
-  font-size: 4.8rem;
-  font-weight: 700;
-  color: ${(props) => props.theme.accentColor};
-`;
-
 const Category = styled.ul`
   display: grid;
   width: 100%;
   grid-template-columns: repeat(3, 1fr);
-  & button {
-    width: 100%;
-    color: ${(props) => props.theme.textColor};
-    border-bottom: 3px solid lightgray;
-    padding: 1rem;
-    font-size: 1.6rem;
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-    transition: border-color 0.3s, color 0.3s;
-    &:disabled,
-    &:hover {
-      border-color: ${(props) => props.theme.accentColor};
-      color: ${(props) => props.theme.accentColor};
-      font-weight: 600;
-    }
-  }
 `;
 
 const ToDoItems = styled.ul`
