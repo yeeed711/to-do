@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { categoryState, toDoState } from '../atoms';
@@ -29,7 +29,7 @@ const CreateToDo = () => {
   }, [toDos]);
 
   return (
-    <Form onSubmit={handleSubmit(handleVaild)}>
+    <Form onSubmit={handleSubmit(handleVaild)} autoComplete='off'>
       <ToDoInput
         {...register('toDo', { required: '할 일이 입력되지 않았습니다!' })}
         placeholder='할 일을 입력해주세요 :)'
@@ -39,7 +39,9 @@ const CreateToDo = () => {
   );
 };
 
-export default CreateToDo;
+const MemoizedCreateToDo = React.memo(CreateToDo);
+
+export default MemoizedCreateToDo;
 
 const Form = styled.form`
   width: 100%;

@@ -1,9 +1,9 @@
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import reset from 'styled-reset';
 import { useRecoilValue } from 'recoil';
 import { isDarkAtom } from './atoms';
 import { darkTheme, lightTheme } from './theme';
-import ToDoList from './components/ToDoList';
+import Home from './components/Home';
 
 const GlobalStyle = createGlobalStyle`
 ${reset}
@@ -68,10 +68,19 @@ function App() {
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
-        <ToDoList />
+        <Title>TO DO</Title>
+        <Home />
       </ThemeProvider>
     </>
   );
 }
 
 export default App;
+
+const Title = styled.h1`
+  font-size: 4.8rem;
+  font-weight: 700;
+  text-align: center;
+  color: ${(props) => props.theme.accentColor};
+  margin: 3rem;
+`;

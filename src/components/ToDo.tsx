@@ -59,7 +59,9 @@ const ToDo = ({ id, text, category }: IToDo) => {
   );
 };
 
-export default ToDo;
+const MemoizdToDo = React.memo(ToDo);
+
+export default MemoizdToDo;
 
 const Li = styled.li`
   padding: 1.5rem 2rem 0 2rem;
