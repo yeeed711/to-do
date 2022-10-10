@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { categoryState, toDoState } from '../atoms';
 import styled from 'styled-components';
 
@@ -9,7 +9,7 @@ interface IForm {
 }
 
 const CreateToDo = () => {
-  const [toDos, setToDos] = useRecoilState(toDoState);
+  const setToDos = useSetRecoilState(toDoState);
   const category = useRecoilValue(categoryState);
   const { register, handleSubmit, setValue } = useForm<IForm>();
   const handleVaild = ({ toDo }: IForm) => {
@@ -23,10 +23,6 @@ const CreateToDo = () => {
     ]);
     setValue('toDo', '');
   };
-
-  useEffect(() => {
-    localStorage.setItem('toDos', JSON.stringify(toDos));
-  }, [toDos]);
 
   return (
     <Form onSubmit={handleSubmit(handleVaild)} autoComplete='off'>
