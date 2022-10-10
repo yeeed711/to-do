@@ -28,7 +28,7 @@ const CreateToDo = () => {
     <Form onSubmit={handleSubmit(handleVaild)} autoComplete='off'>
       <ToDoInput
         {...register('toDo', { required: '할 일이 입력되지 않았습니다!' })}
-        placeholder='할 일을 입력해주세요 :)'
+        placeholder={`${category}을 입력해 주세요 :)`}
       />
       <Button>입력</Button>
     </Form>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSetRecoilState } from 'recoil';
-import { toDoState, Categories, IToDo } from '../atoms';
+import { toDoState, defaultCategories, IToDo } from '../atoms';
 
 const ToDo = ({ id, text, category }: IToDo) => {
   const setToDos = useSetRecoilState(toDoState);
@@ -38,19 +38,19 @@ const ToDo = ({ id, text, category }: IToDo) => {
     <Li>
       {text}
       <ButtonWrapper>
-        {category !== Categories.해야할일 && (
-          <DoBtn name={Categories.해야할일} onClick={onClick}>
-            해야할 일
+        {category !== defaultCategories[0] && (
+          <DoBtn name={defaultCategories[0]} onClick={onClick}>
+            {defaultCategories[0]}
           </DoBtn>
         )}
-        {category !== Categories['진행 중'] && (
-          <DoingBtn name={Categories['진행 중']} onClick={onClick}>
-            진행 중
+        {category !== defaultCategories[1] && (
+          <DoingBtn name={defaultCategories[1]} onClick={onClick}>
+            {defaultCategories[1]}
           </DoingBtn>
         )}
-        {category !== Categories.완료됨 && (
-          <DoneBtn name={Categories.완료됨} onClick={onClick}>
-            완료됨
+        {category !== defaultCategories[2] && (
+          <DoneBtn name={defaultCategories[2]} onClick={onClick}>
+            {defaultCategories[2]}
           </DoneBtn>
         )}
         <DelBtn onClick={handleDelete}>삭제</DelBtn>
